@@ -1,15 +1,9 @@
-import { validateRequest } from "@/lib/auth"
 import Link from "next/link";
 import { getAllClients } from "../actions/client/client.controller";
 import ActionColumn, { MoreInfoColumn } from "@/components/action-column";
 
 export default async function HomePage() {
-    const { user } = await validateRequest();
-    if (!user) {
-        return <div>Unauthorized</div>;
-    }
     const clients = await getAllClients();
-
     return (
         <div className="h-screen flex flex-col bg-gray-100">
             {/* Main Content */}
@@ -44,6 +38,9 @@ export default async function HomePage() {
                                             Status
                                         </th>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Created At
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Medical Info
                                         </th>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -76,6 +73,9 @@ export default async function HomePage() {
                                                     }`}>
                                                     {client.isActive ? 'Active' : 'Inactive'}
                                                 </span>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {client.createdAt.toLocaleDateString()}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 <div className="flex gap-2">

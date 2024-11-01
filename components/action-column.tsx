@@ -3,7 +3,6 @@ import { deleteClient } from "@/app/actions/client/client.controller";
 import { Client } from "@prisma/client";
 import { MoreHorizontalIcon, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function ActionColumn(props: { clientId: number }) {
     return (
@@ -27,7 +26,7 @@ export default function ActionColumn(props: { clientId: number }) {
 
 export function MoreInfoColumn(props: { client: Client }) {
     function openDialog(open: boolean) {
-        const dialog = document.getElementById(`dialog-${props.client.id}`) as any;
+        const dialog = document.getElementById(`dialog-${props.client.id}`) as HTMLDialogElement;
         if (!dialog) return;
         if (open) {
             dialog.showModal();
@@ -41,21 +40,21 @@ export function MoreInfoColumn(props: { client: Client }) {
                 <MoreHorizontalIcon onClick={() => openDialog(true)} size={20} className="h-5 w-5 text-black cursor-pointer hover:scale-110 transition-all" />
             </div>
             <dialog id={`dialog-${props.client.id}`}>
-            <div className="w-[400px] bg-white shadow-lg rounded-lg overflow-hidden p-10">
-                <div className="px-6 py-4">
-                    <h2 className="font-bold text-2xl mb-2 text-gray-800">{props.client.fullName}</h2>
-                    <div className="">
-                        <span className="font-bold text-lg">Additional Attributes</span>
-                        <p className="text-lg">{props.client.additionalAttributes}</p>
-                        <span className="font-bold text-lg">Other Illness</span>
-                        <p className="text-lg">{props.client.otherIllness}</p>
+                <div className="w-[400px] bg-white shadow-lg rounded-lg overflow-hidden p-10">
+                    <div className="px-6 py-4">
+                        <h2 className="font-bold text-2xl mb-2 text-gray-800">{props.client.fullName}</h2>
+                        <div className="">
+                            <span className="font-bold text-lg">Additional Attributes</span>
+                            <p className="text-lg">{props.client.additionalAttributes}</p>
+                            <span className="font-bold text-lg">Other Illness</span>
+                            <p className="text-lg">{props.client.otherIllness}</p>
+                        </div>
+                    </div>
+                    <div className="flex justify-end w-full">
+                        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md" onClick={() => openDialog(false)}>Close</button>
                     </div>
                 </div>
-                <div className="flex justify-end w-full">
-                    <button className="bg-indigo-600 text-white px-4 py-2 rounded-md" onClick={() => openDialog(false)}>Close</button>
-                </div>
-            </div>
-        </dialog>
+            </dialog>
         </>
     )
 }

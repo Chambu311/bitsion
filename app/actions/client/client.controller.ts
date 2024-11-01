@@ -2,7 +2,6 @@
 import { validateRequest } from "@/lib/auth";
 import { createClientService } from "./use-cases/create-client";
 import { getClientService } from "./use-cases/get-client";
-import { redirect } from "next/navigation";
 import { updateClientService } from "./use-cases/update-client";
 
 export async function createClient(formData: FormData) {
