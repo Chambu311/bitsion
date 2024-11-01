@@ -88,7 +88,7 @@ export default async function HomePage() {
                                                 <ActionColumn clientId={client.id} />
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <MoreInfoColumn client={client} />
+                                                <MoreInfoColumn key={client.id} client={client} />
                                             </td>
                                         </tr>
                                     ))}
